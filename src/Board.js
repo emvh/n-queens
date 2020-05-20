@@ -117,20 +117,53 @@
       return false;
     },
 
-
-
     // COLUMNS - run from top to bottom
     // --------------------------------------------------------------
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      //
+      // grab the overall matrix array length
+      var matrix = this.rows();
+      // create counter variable = 0
+      var counter = 0;
+      // iterate over each subarray in the overall matrix array
+      for (var i = 0; i < matrix.length; i++) {
+        var currentVal = matrix[i][colIndex];
+        // increment counter variable at that colIndex value if there's a 1
+        counter += currentVal;
+      }
+      // if counter is greater than 1, return true
+      if (counter > 1) {
+        return true;
+      }
+      // otherwise return false
       return false; // fixme
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      // access columns by the index of each row
+
+
+      for (var rowIndex in this.attributes) {
+        var rowArray = this.attributes[rowIndex];
+        var counterObj = {};
+        for (var i = 0; i < rowArray.length - 1; i++) {
+          if (rowArray[i] === 1) {
+            if (counterObj.hasOwnProperty) {
+              counterObj[i]++;
+            } else {
+              counterObj[i] = 1;
+            }
+          }
+        }
+      }
+      for (var colIndex in counterObj) {
+        if (counterObj[colIndex] > 1) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
