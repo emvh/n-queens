@@ -79,6 +79,9 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      // access the rowIndex of the matrix
+      // if any value in the row is not equal to zero, there there is a conflict there
+      // return true if there is a conflict
       var rowArray = this.attributes[rowIndex];
       var counter = 0;
       for (var i = 0; i < rowArray.length; i++) {
@@ -89,21 +92,17 @@
       if (counter > 1) {
         return true;
       }
-      // need to access the rowIndex of the matrix
-      // if any value in the row is not equal to zero, there there is a conflict there
-      // return true if there is a conflict
       return false;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
       // check each row
-      // if two values (1s) exist in a row, this row contains a conflict (return true)
+      // if two values (1s) exist in the same row, this row contains a conflict (return true)
       // console.log('hi')
       // console.log(this.attributes); // --> object containing matrix
 
       for (var rowIndex in this.attributes) {
-        // console.log(rowIndex);
         var rowArray = this.attributes[rowIndex];
         var counter = 0;
         for (var i = 0; i < rowArray.length - 1; i++) {
