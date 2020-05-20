@@ -142,28 +142,40 @@
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      // access columns by the index of each row
-
-
-      for (var rowIndex in this.attributes) {
-        var rowArray = this.attributes[rowIndex];
-        var counterObj = {};
-        for (var i = 0; i < rowArray.length - 1; i++) {
-          if (rowArray[i] === 1) {
-            if (counterObj.hasOwnProperty) {
-              counterObj[i]++;
-            } else {
-              counterObj[i] = 1;
-            }
-          }
-        }
-      }
-      for (var colIndex in counterObj) {
-        if (counterObj[colIndex] > 1) {
+      //make alias for matrix
+      var matrix = this.rows();
+      //loop through matrix
+      for (var i = 0; i < matrix.length; i++) {
+        //if there is a conflict at the current column
+        if (this.hasColConflictAt(i) === true) {
+          //return true
           return true;
         }
+
       }
       return false;
+      //otherwise
+        //return false
+
+      // for (var rowIndex in this.attributes) {
+      //   var rowArray = this.attributes[rowIndex];
+      //   var counterObj = {};
+      //   for (var i = 0; i < rowArray.length - 1; i++) {
+      //     if (rowArray[i] === 1) {
+      //       if (counterObj.hasOwnProperty) {
+      //         counterObj[i]++;
+      //       } else {
+      //         counterObj[i] = 1;
+      //       }
+      //     }
+      //   }
+      // }
+      // for (var colIndex in counterObj) {
+      //   if (counterObj[colIndex] > 1) {
+      //     return true;
+      //   }
+      // }
+      // return false;
     },
 
 
