@@ -239,12 +239,12 @@
       // create counter variable
       debugger;
       var counter = 0;
-      var width = this.rows().length; // 4
+      var width = this.rows().length;
       // if diagonal is smaller than length
-      if (minorDiagonalColumnIndexAtFirstRow < width) { // 2 < 4
+      if (minorDiagonalColumnIndexAtFirstRow < width) {
         // row index = 0 & colIndex = value of input (diagonal)
         var rowIndex = 0;
-        var colIndex = minorDiagonalColumnIndexAtFirstRow; // 2
+        var colIndex = minorDiagonalColumnIndexAtFirstRow;
         while (rowIndex < this.rows().length) {
           // check if row index/col index are inbounds // maybe first line
           if (this._isInBounds(rowIndex, colIndex)) {
