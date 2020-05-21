@@ -163,7 +163,6 @@
     //
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function (majorDiagonalColumnIndexAtFirstRow) {
-
       // create counter variable
       var counter = 0;
       // if diagonal is positive
@@ -215,7 +214,6 @@
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function () {
-      debugger;
       var diagonal = this.rows().length - 1; // -3  to 3
       var counter = -diagonal;
       //check each diagonal
@@ -238,13 +236,75 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function (minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      // create counter variable
+      debugger;
+      var counter = 0;
+      var width = this.rows().length; // 4
+      // if diagonal is smaller than length
+      if (minorDiagonalColumnIndexAtFirstRow < width) { // 2 < 4
+        // row index = 0 & colIndex = value of input (diagonal)
+        var rowIndex = 0;
+        var colIndex = minorDiagonalColumnIndexAtFirstRow; // 2
+        while (rowIndex < this.rows().length) {
+          // check if row index/col index are inbounds // maybe first line
+          if (this._isInBounds(rowIndex, colIndex)) {
+            // at the current position, add current value to counter
+            counter += this.rows()[rowIndex][colIndex];
+          }
+          // increment row index and decrement col index
+          rowIndex++;
+          colIndex--;
+          // if counter is greater than 1
+          if (counter > 1) {
+            // then return true
+            return true;
+          }
+        }
+      }
+      // if diagonal great than or equal to LENGTH
+      if (minorDiagonalColumnIndexAtFirstRow >= width) {
+        // rowIndex = value of input (diagonal) & colIndex = 0
+        // at the current position, add current value to counter
+        var colIndex = width - 1;
+        var rowIndex = minorDiagonalColumnIndexAtFirstRow - (colIndex);
+
+        while (rowIndex < this.rows().length) {
+          // check if row index/col index are inbounds
+          if (this._isInBounds(rowIndex, colIndex)) {
+            // at the current position, add current value to counter
+            counter += this.rows()[rowIndex][colIndex];
+          }
+          // increment row index and col index by 1 each
+          rowIndex++;
+          colIndex--;
+          // if counter is greater than 1
+          if (counter > 1) {
+            // then return true
+            return true;
+          }
+        }
+      }
+      return false;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function () {
-      return false; // fixme
-    }
+      // debugger;
+      var diagonal = 2 * (this.rows().length - 1); // diagonal range: 0 to 6
+      var counter = 0;
+      //check each diagonal
+      while (counter <= diagonal) {
+        //if there is a conflict
+        console.log(this.hasMinorDiagonalConflictAt(counter))
+        if (this.hasMinorDiagonalConflictAt(counter)) {
+          //return true
+          return true;
+        }
+        counter++;
+      }
+      return false;
+    },
+
 
     /*--------------------  End of Helper Functions  ---------------------*/
 
