@@ -24,10 +24,13 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
-
+  // base case: if (n === 0)
+  if (n === 0) {
+    var solutionCount;
+    return solutionCount = 1;
+  }
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
-  return solutionCount;
+  return solutionCount = n * countNRooksSolutions(n - 1);
 };
 
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n queens placed such that none of them can attack each other
