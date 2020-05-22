@@ -82,64 +82,46 @@ window.findNQueensSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n queens placed such that none of them can attack each other
 window.countNQueensSolutions = function(n) {
+  debugger;
   var board1 = new Board( {n: n} );
   var queenSolutions = [];
-  var solutionCount = undefined;
+  var solutionCount;
   //create queen counter
+  var queenCounter = n;
+  var rowCounter = 0;
   // create helper function
   var findPossibilities = function(row, queenCounter) {
     // base case: when our queens counter is 0, we update the solution
     if (queenCounter === 0) {
-      queenSolutions.push(board1);
+      solutionCount++;
       return;
     }
     // recursive case:
     // for each position check if there is a conflict
     for (var i = 0; i < n; i++) {
       // place the queen
-      board1.toggle(row, i);
+      board1.togglePiece(row, i);
       // if there's a conflict
       if (board1.hasAnyColConflicts && board1.hasAnyMajorDiagonalConflicts && board1.hasAnyMinorDiagonalConflicts) {
         // remove the queen
-        board1.toggle(row, i);
-      }
-      // if there's not a conflict
+        board1.togglePiece(row, i);
+      } else {
+        // if there's not a conflict
         // increment row
-        row++;
+
         // decrement the queen counter
-        queenCounter--;
+
         // recurse (row)
-        findPossibilities(row, queenCounter);
+        findPossibilities(row++, queenCounter--);
         // remove the queen and increment the queen counter
-        board1.toggle(row, i);
+        board1.togglePiece(row, i);
         queenCounter++;
+      }
     }
     return;
-  }
+  };
+  findPossibilities(rowCounter, n);
   solutionCount = queenSolutions.length;
   console.log('Number of solutions for ' + n + ' queens:', solutionCount);
   return solutionCount;
 };
-
-
-  // storage containers
-  // var colStorage = {};
-  // var majorStorage = {};
-  // var minorStorage = {};
-
-  // add (0,0) to storage
-  // colStorage[colIndex] = true;
-  // var majorDiagonalName = board1._getFirstRowColumnIndexForMajorDiagonalOn(rowIndex, colIndex);
-  // majorStorage[majorDiagonalName] = true;
-  // var minorDiagonalName = board1._getFirstRowColumnIndexForMinorDiagonalOn(rowIndex, colIndex);
-  // minorStorage[minorDiagonalName] = true;
-
-
-
-  // for (var rowIndex = 0; colIndex < n; colIndex++) {
-  //   // check storages
-  //   if (colStorage.hasOwnProperty(colIndex) !== false && majorStorage.hasOwnProperty(majorDiagonalName) !== false && minorStorage.hasOwnProperty(minorDiagonalName) !== false) {
-  //   // place it
-  //     board1.togglePiece(rowIndex, colIndex);
-  //   }
-  // }
