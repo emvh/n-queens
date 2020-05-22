@@ -237,7 +237,6 @@
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function (minorDiagonalColumnIndexAtFirstRow) {
       // create counter variable
-      debugger;
       var counter = 0;
       var width = this.rows().length;
       // if diagonal is smaller than length
@@ -295,7 +294,6 @@
       //check each diagonal
       while (counter <= diagonal) {
         //if there is a conflict
-        console.log(this.hasMinorDiagonalConflictAt(counter))
         if (this.hasMinorDiagonalConflictAt(counter)) {
           //return true
           return true;
